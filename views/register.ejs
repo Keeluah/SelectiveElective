@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="/open-iconic-bootstrap.css" rel="stylesheet">
+    <link href="/selectStyle.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="/main.js"></script>
+    <title>Select-Electives</title>
+  </head>
+
+  <body>
+
+      <div>
+        <center><img id="logoImg" src="/select4Logo.png"></center>
+        <center>
+        <div id="formFields">
+        <form method="POST" action="/register">
+          <div>
+            <label class="regLabel">name *</label>
+            <input type="text" id="userName" name="name" required/>
+          </div>
+          <div>
+            <label class="regLabel">email *</label>
+            <input type="email" id="userEmail" name="email" required/>
+          </div>
+          <div>
+            <label class="regLabel">password *</label>
+            <input type="password" id="userPass" name="password" required/>
+          </div>
+          <div>
+            <label class="regLabel">account *</label>
+            <select id="accountType">
+              <option value="--">--</option>
+              <option value="student">Student</option>
+              <option value="admin">Administrator</option>
+            </select>
+            <input class="hiddenDiv" type="text" id="accType" name="accType" required/>
+          </div>
+          <div class="hiddenDiv" id="schoolField">
+            <label class="regLabel">school *</label>
+            <input type="text" id="userschool" name="school" required/>
+          </div>
+          <div >
+          <div class="hiddenDiv" id="addressField">
+            <label class="regLabel">address</label>
+            <input type="text" id="userPass" name="address"/>
+          </div>
+          <div class="hiddenDiv" id="phoneField">
+            <label class="regLabel">phone</label>
+            <input type="tel" id="userPhone" name="phone"/>
+          </div>
+          <div class="hiddenDiv" id="sidField">
+            <label class="regLabel">student ID</label>
+            <input type="text" id="userSID" name="sID"/>
+          </div>
+          <div style="margin:5px; color:white; font-size:14px;"><%= message %></div>
+          <center><div><button type="submit" class="btn btn-primary btn-sm btn-success">register</button></div></center>
+        </form>
+        </div>
+        </center>
+      </div>
+
+  </body>
+</html>

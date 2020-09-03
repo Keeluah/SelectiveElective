@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="/open-iconic-bootstrap.css" rel="stylesheet">
+    <link href="/selectStyle.css" rel="stylesheet">
+    <link href="/jquery-ui.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/main.js"></script>
+    <title>Select-Electives</title>
+  </head>
+
+  <body style="background-color: white">
+    <div id="topBar">
+      <img id="logoImg" src="/select4Logo.png">
+    </div>
+    <div id="bottomPart">
+      <div id="navMenu">
+        <div><button class="menuItem" id="facultiesButton">Faculties</button></div>
+        <div id="adminNavButtons">
+          <div><button class="menuItem" id="addFacultyButton">Add Faculty</button></div>
+          <div><button class="menuItem" id="adminAllCourseButton">All Courses</button></div>
+          <div><button class="menuItem" id="addCourseButton">Add Course</button></div>
+          <div><button class="menuItem" id="adminChatButton">Student Chat</button></div>
+          <div><button class="menuItem" id="postNewsButton">Post News</button></div>
+        </div>
+        <div id="studentNavButtons">
+          <div><button class="menuItem" id="studAllCourseButton">All Courses</button></div>
+          <div><button class="menuItem" id="userWishlistButton">Wishlist</button></div>
+          <div><button class="menuItem" id="studentChatButton">Admin Chat</button></div>
+        </div>
+        <div><button class="menuItem" id="accInfoButton">Account</button></div>
+        <form><div><button formaction="/logout" class="menuItem">Logout</button></div></form>
+      </div>
+      <div id="middleContent">
+        <div id="faculties-page" class="collection"></div>
+        <div id="adminPages">
+          <div id="adminOneFac-page"></div>
+          <div id="removeFac-confirm" class="hiddenDiv">
+            <p style="text-align:center;">remove faculty?</p>
+          </div>
+          <div id="adminAddFac-page">
+            <div><label class="simpleLabel">Faculty name *</label></div>
+            <div><input class="simpleInput" type="text" id="facName"/></div>
+            <div><label class="simpleLabel">Image URL *</label></div>
+            <div><input class="simpleInput" type="text" id="facImg"/></div>
+            <div id="addFacultyError" class="hiddenDiv errorMsg"></div>
+            <div><button class="btn btn-primary btn-sm btn-success" id="addFacultyToDB">add faculty</button></div>
+          </div>
+          <div id="adminAllCourse-page"></div>
+          <div id="adminAddCourse-page">
+            <div><label class="simpleLabel">Faculty *</label></div>
+            <div><input class="simpleInput" type="text" placeholder="ex: Science" id="addFaculty"/></div>
+            <div><label class="simpleLabel">Department code *</label></div>
+            <div><input class="simpleInput" type="text" placeholder="ex: CPSC" id="addDeptCode"/></div>
+            <div><label class="simpleLabel">Course level *</label></div>
+            <div><input class="simpleInput" type="number" placeholder="ex: 201" id="addCourseLevel"/></div>
+            <div><label class="simpleLabel">Course name *</label></div>
+            <div><input class="simpleInput" type="text" id="addCourseName"/></div>
+            <div><label class="simpleLabel">Description</label></div>
+            <div><textarea class="addCourseTextarea" id="addDescription"></textarea></div>
+            <div><label class="simpleLabel">Textbook 1</label></div>
+            <div><label class="addTbookLabel">ISBN</label><input type="text" id="ISBN1"/></div>
+            <div><label class="addTbookLabel">name</label><input type="text" id="textbook1"/></div>
+            <div><label class="addTbookLabel">edition</label><input type="text" id="edition1"/></div>
+            <div><label class="addTbookLabel">price</label><input type="text" id="price1"/></div>
+            <div><label class="simpleLabel">Textbook 2</label></div>
+            <div><label class="addTbookLabel">ISBN</label><input type="text" id="ISBN2"/></div>
+            <div><label class="addTbookLabel">name</label><input type="text" id="textbook2"/></div>
+            <div><label class="addTbookLabel">edition</label><input type="text" id="edition2"/></div>
+            <div><label class="addTbookLabel">price</label><input type="text" id="price2"/></div>
+            <div id="addCourseError" class="hiddenDiv errorMsg"></div>
+            <div><button class="btn btn-primary btn-sm btn-success" id="addCourseToDB">add course</button></div>
+          </div>
+          <div id="adminMsgList-page"></div>
+          <div id="trashMsg-confirm" class="hiddenDiv">
+            <p style="text-align:center;">delete message?</p>
+          </div>
+          <div id="adminTrashCourse-confirm" class="hiddenDiv">
+            <p style="text-align:center;">delete course?</p>
+          </div>
+          <div id="adminPostNews-page">
+            <div><label class="simpleLabel">News Title</label></div>
+            <div><input class="simpleInput" type="text" id="postNewsName"/></div>
+            <div><label class="simpleLabel">News Information</label></div>
+            <div><input class="simpleInput" type="text" id="postNewsInfo"/></div>
+            <div id="addPostNewsError" class="hiddenDiv errorMsg"></div>
+            <div><button class="btn btn-primary btn-sm btn-success" id="postNewsToDB">post news</button></div>
+          </div>
+          <div id="adminSearchCourse-page"></div>
+          <div id="adminOneCourse-page">
+            <div><label class="simpleLabel">Faculty *</label></div>
+            <div><input class="simpleInput" type="text" id="editFaculty"/></div>
+            <div><label class="simpleLabel">Department code *</label></div>
+            <div><input class="simpleInput" type="text" id="editDeptCode"/></div>
+            <div><label class="simpleLabel">Course level *</label></div>
+            <div><input class="simpleInput" type="number" id="editCourseLevel"/></div>
+            <div><label class="simpleLabel">Course name *</label></div>
+            <div><input class="simpleInput" type="text" id="editCourseName"/></div>
+            <div><label class="simpleLabel">Description</label></div>
+            <div><textarea class="addCourseTextarea" id="editDescription"></textarea></div>
+            <div><label class="simpleLabel">Textbook 1</label></div>
+            <div><label class="addTbookLabel">ISBN</label><input type="text" id="editISBN1"/></div>
+            <div><label class="addTbookLabel">name</label><input type="text" id="editTextbook1"/></div>
+            <div><label class="addTbookLabel">edition</label><input type="text" id="editEdition1"/></div>
+            <div><label class="addTbookLabel">price</label><input type="text" id="editPrice1"/></div>
+            <div><label class="simpleLabel">Textbook 2</label></div>
+            <div><label class="addTbookLabel">ISBN</label><input type="text" id="editISBN2"/></div>
+            <div><label class="addTbookLabel">name</label><input type="text" id="editTextbook2"/></div>
+            <div><label class="addTbookLabel">edition</label><input type="text" id="editEdition2"/></div>
+            <div><label class="addTbookLabel">price</label><input type="text" id="editPrice2"/></div>
+            <div id="editCourseError" class="hiddenDiv errorMsg"></div>
+            <div><button class="btn btn-primary btn-sm btn-success" id="editCourseToDB">save changes</button></div>
+          </div>
+        </div>
+        <div id="chat-page">
+          <div id="chatHistory"><ul id="msgList"></ul></div>
+          <div id="chatControls">
+            <form id="sendMsg"><input type="text" id="chatInput"/>
+            <button type="submit" class="btn btn-primary btn-sm btn-success" id="sendButton">send</button></form>
+          </div>
+        </div>
+        <div id="studentPages">
+          <div id="studAllCourse-page"></div>
+          <div id="studWishlist-page"></div>
+          <div id="studFacCourse-page"></div>
+          <div id="studOneCourse-page"></div>
+          <div id="studSearchCourse-page"></div>
+          <div id="studTrashCourse-confirm" class="hiddenDiv">
+            <p style="text-align:center;">remove course?</p>
+          </div>
+        </div>
+        <div id="account-page">
+          <div><label class="simpleLabel">name *</label></div>
+          <div><input class="simpleInput" type="text" id="accName"/></div>
+          <div><label class="simpleLabel">email *</label></div>
+          <div><input class="simpleInput" type="email" id="accEmail"/></div>
+          <div><label class="simpleLabel">school name *</label></div>
+          <div><input class="simpleInput" type="text" id="accSchool"/></div>
+          <div><label class="simpleLabel" id="phoneLabel">phone</label></div>
+          <div><input class="simpleInput" type="tel" id="accPhone"/></div>
+          <div><label class="simpleLabel" id="studIDLabel">student ID</label></div>
+          <div><input class="simpleInput" type="text" id="accStudenID"/></div>
+          <div><label class="simpleLabel">old password *</label></div>
+          <div><input class="simpleInput" type="password" id="accOldPass"/></div>
+          <div><label class="simpleLabel">new password</label></div>
+          <div><input class="simpleInput" type="password" id="accNewPass"/></div>
+          <div id="accInfoError" class="hiddenDiv errorMsg"></div>
+          <div><button class="btn btn-primary btn-sm btn-success" id="saveAccChanges">save changes</button></div>
+        </div>
+      </div>
+      <div id="sideItems">
+        <div id="searchBar">
+          <form id="searchForm"><div><input type="text" placeholder="search courses" id="searchCoursesText"/></div>
+          <div><button class="btn btn-primary btn-sm btn-success" id="searchCourseButton">search</button></div></form>
+        </div>
+        <div id="newsSection">
+          <div id="newsTitle">NEWS</div>
+          <div class="info" id="newsContent"></div>
+        </div>
+      </div>
+    </div>
+    <div class="hiddenDiv" id="userAccID"><%= userAccID %></div>
+    <div class="hiddenDiv" id="userSchoolID"><%= userSchoolID %></div>
+    <div class="hiddenDiv" id="userType"><%= userType %></div>
+    <div class="hiddenDiv" id="userSchoolName"><%= userSchoolName %></div>
+    <div class="hiddenDiv" id="userPhoneNo"><%= userPhoneNo %></div>
+    <div class="hiddenDiv" id="userStundentID"><%= userStundentID %></div>
+    <div class="hiddenDiv" id="userEmail"><%= userEmail %></div>
+    <div class="hiddenDiv" id="userName"><%= userName %></div>
+  </body>
+</html>
