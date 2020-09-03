@@ -1,0 +1,24 @@
+-- Table: public.wishlist
+
+-- DROP TABLE public.wishlist;
+
+CREATE TABLE public.wishlist
+(
+    student_no integer NOT NULL,
+    course_no integer NOT NULL,
+    CONSTRAINT "addedByStudent" FOREIGN KEY (student_no)
+        REFERENCES public.account (member_id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT "wishedCourse" FOREIGN KEY (course_no)
+        REFERENCES public.course (course_id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.wishlist
+    OWNER to cpsc;

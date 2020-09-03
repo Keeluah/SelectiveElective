@@ -1,0 +1,22 @@
+-- Table: public.comment
+
+-- DROP TABLE public.comment;
+
+CREATE TABLE public.comment
+(
+    student_rating integer,
+    feedback text COLLATE pg_catalog."default" NOT NULL,
+    date text COLLATE pg_catalog."default" NOT NULL,
+    course_no integer NOT NULL,
+    CONSTRAINT "belongsToCourse" FOREIGN KEY (course_no)
+        REFERENCES public.course (course_id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.comment
+    OWNER to cpsc;

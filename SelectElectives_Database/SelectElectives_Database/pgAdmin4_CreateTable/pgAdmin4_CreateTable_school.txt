@@ -1,0 +1,19 @@
+-- Table: public.school
+
+-- DROP TABLE public.school;
+
+CREATE TABLE public.school
+(
+    school_id integer NOT NULL DEFAULT nextval('school_school_id_seq'::regclass),
+    school_name text COLLATE pg_catalog."default" NOT NULL,
+    email_suffix text COLLATE pg_catalog."default" NOT NULL,
+    address text COLLATE pg_catalog."default",
+    CONSTRAINT school_pkey PRIMARY KEY (school_id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.school
+    OWNER to cpsc;

@@ -1,0 +1,25 @@
+-- Table: public.chat
+
+-- DROP TABLE public.chat;
+
+CREATE TABLE public.chat
+(
+    student_id integer NOT NULL,
+    admin_id integer,
+    msg_history text[] COLLATE pg_catalog."default",
+    CONSTRAINT "fromAdmin" FOREIGN KEY (admin_id)
+        REFERENCES public.account (member_id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE NO ACTION,
+    CONSTRAINT "fromStudent" FOREIGN KEY (student_id)
+        REFERENCES public.account (member_id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.chat
+    OWNER to cpsc;

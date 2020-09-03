@@ -1,0 +1,31 @@
+-- Table: public.course
+
+-- DROP TABLE public.course;
+
+CREATE TABLE public.course
+(
+    course_id integer NOT NULL DEFAULT nextval('course_course_id_seq'::regclass),
+    dept_code text COLLATE pg_catalog."default" NOT NULL,
+    course_level integer NOT NULL,
+    description text COLLATE pg_catalog."default",
+    avg_rating double precision,
+    course_name text COLLATE pg_catalog."default" NOT NULL,
+    faculty_no integer NOT NULL,
+    admin_id integer NOT NULL,
+    CONSTRAINT course_pkey PRIMARY KEY (course_id),
+    CONSTRAINT "belongsToFaculty" FOREIGN KEY (faculty_no)
+        REFERENCES public.faculty (faculty_id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT "mustHaveAdmin" FOREIGN KEY (admin_id)
+        REFERENCES public.account (member_id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.course
+    OWNER to cpsc;

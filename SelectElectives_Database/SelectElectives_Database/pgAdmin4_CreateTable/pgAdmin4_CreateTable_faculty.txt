@@ -1,0 +1,23 @@
+-- Table: public.faculty
+
+-- DROP TABLE public.faculty;
+
+CREATE TABLE public.faculty
+(
+    faculty_id integer NOT NULL DEFAULT nextval('faculty_faculty_id_seq'::regclass),
+    faculty_name text COLLATE pg_catalog."default" NOT NULL,
+    faculty_img text COLLATE pg_catalog."default",
+    school_no integer NOT NULL,
+    CONSTRAINT faculty_pkey PRIMARY KEY (faculty_id),
+    CONSTRAINT "belongsToSchool" FOREIGN KEY (school_no)
+        REFERENCES public.school (school_id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.faculty
+    OWNER to cpsc;
